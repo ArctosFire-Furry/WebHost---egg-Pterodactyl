@@ -1,79 +1,86 @@
-# 🥚 FurCode - WebHost | Egg Pterodactyl
+# 🦊 FurCode — WebHost 🚀
 
-![Version](https://img.shields.io/badge/Version-1.0.0-orange?style=for-the-badge)
-![Logiciel](https://img.shields.io/badge/Stack-Nginx%20%7C%20PHP--FPM-blue?style=for-the-badge)
-![Furry](https://img.shields.io/badge/Community-Furry%20Friendly-ff69b4?style=for-the-badge)
-
-Bienvenue sur le dépôt officiel de **FurCode - WebHost**. Ce projet propose un "Egg" (œuf) haute performance pour le panel **Pterodactyl**, conçu spécifiquement pour l'hébergement web moderne, fluide et sécurisé. ✨
-
----
-
-## 🐾 À quoi ça sert ?
-
-L'objectif de **FurCode - WebHost** est de simplifier radicalement le déploiement de sites web sur un nœud Pterodactyl. Contrairement aux installations classiques souvent complexes, cet œuf pré-configure tout pour toi :
-* **Serveur Web :** Nginx (Ultra léger et rapide).
-* **Moteur Script :** PHP-FPM (Versions 7.4 à 8.3 supportées).
-* **Sécurité :** Isolation des processus et gestion des permissions optimisée.
-* **Interface :** Page d'accueil personnalisée **FurCode** incluse par défaut.
+<p align="center">
+  <img src="https://img.shields.io/badge/Version-1.0.2-FF9800?style=for-the-badge&logo=github" alt="Version">
+  <img src="https://img.shields.io/badge/Stack-Nginx_%7C_PHP--FPM_8.x-4F5B93?style=for-the-badge&logo=php" alt="PHP">
+  <img src="https://img.shields.io/badge/Furry-Community_Driven-white?style=for-the-badge&logo=pawprint&logoColor=orange" alt="Furry">
+  <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License">
+</p>
 
 ---
 
-## 🚀 Guide d'Installation Rapide
+## 🌟 L'Essence du Projet
 
-### 1. Préparation
-* Télécharge le fichier `egg-web-host-egg.json` présent dans ce dépôt.
-* Assure-toi d'avoir un **Nest** (Nid) de type "Web Services" sur ton panel.
+**FurCode — WebHost** n'est pas qu'un simple fichier de configuration. C'est un environnement d'hébergement web **clé en main** pour Pterodactyl, pensé pour la performance et le style. 
 
-### 2. Importation
-1.  Rends-toi sur ton **Panel Admin Pterodactyl**.
-2.  Va dans la section **Nests**, puis clique sur le bouton **Import Egg**.
-3.  Sélectionne le fichier JSON téléchargé.
-4.  Associe-le au Nest de ton choix (ex: *WebServices*).
+Que tu sois un développeur chevronné ou un louveteau qui débute dans le web, cet Egg t'offre une base solide, rapide et surtout... **stylée**.
 
-### 3. Création du Serveur
-* Crée un nouveau serveur en choisissant l'Egg **FurCode - WebHost**.
-* **Optionnel :** Tu peux lier un dépôt Git directement à la création pour que ton site se déploie automatiquement !
+> [!IMPORTANT]
+> **Pourquoi choisir FurCode ?** > Contrairement aux œufs génériques, celui-ci inclut une structure de dossiers intelligente, des logs accessibles et une page d'accueil interactive dès l'installation.
 
 ---
 
-## 🛠️ Fonctionnalités Avancées
+## 🛠️ Fonctionnalités de la Meute
 
-* **Auto-Installateur :** Support natif pour **WordPress** et **NamelessMC** via une simple case à cocher.
-* **Gestion Git :** Déploiement automatique via branche spécifique avec support des Tokens d'accès personnels (PAT).
-* **Structure de dossiers claire :**
-    * `/webroot` : Tes fichiers publics (index.php, etc.).
-    * `/nginx` : Configuration du serveur web (si tu veux personnaliser tes routes).
-    * `/php-fpm` : Configuration du moteur PHP.
-    * `/logs` : Accès direct aux erreurs pour un debug rapide.
+* ⚡ **Vitesse Éclair :** Basé sur l'architecture **Nginx + PHP-FPM** pour un temps de réponse minimal.
+* 📦 **Auto-Déploiement :** Installez **WordPress** ou **NamelessMC** en un clic via les variables du panel.
+* 🧬 **Hybride FurCode :** Page de démarrage PHP/JS dynamique incluse (affiche ta version PHP et ton IP).
+* 🌐 **Git-Sync :** Liez votre dépôt GitHub/GitLab (Public ou Privé avec Token) et déployez vos modifications à chaque démarrage.
 
 ---
 
-## ❓ FAQ (Foire Aux Questions)
+## 🚀 Installation Express
 
-> **Q : Puis-je changer la version de PHP ?**
-> **R :** Oui ! Cela dépend de l'image Docker sélectionnée dans la configuration de ton serveur. L'œuf est compatible avec la plupart des images PHP-FPM récentes.
+### 1️⃣ Récupération
+Télécharge le graal : [`WebHost-FurCode.json`](./WebHost-FurCode.json) depuis ce dépôt.
 
-> **Q : Comment puis-je mettre à jour mon site via GitHub ?**
-> **R :** Remplis les variables `GIT_ADDRESS` et `BRANCH`. À chaque réinstallation du serveur, FurCode ira chercher la dernière version de ton code.
+### 2️⃣ Importation
+* Direction ton **Admin Panel Pterodactyl**.
+* Section **Nests** > Bouton **Import Egg**.
+* Sélectionne le fichier `WebHost-FurCode.json`.
 
-> **Q : Le serveur ne démarre pas (Erreur de permissions) ?**
-> **R :** Assure-vous que le dossier `/home/container` appartient bien à l'utilisateur du serveur. En général, un bouton "Fix Permissions" sur le panel règle cela instantanément.
-
-> **Q : Où sont mes bases de données ?**
-> **R :** Cet Egg gère la partie Web. Pour la base de données, nous te conseillons de créer un serveur MySQL/MariaDB séparé sur ton panel et de lier les deux.
-
----
-
-## 🤝 Contribution & Support
-
-Les retours de la communauté sont le cœur de **FurCode**. 
-* 🐾 **Un bug ?** Ouvre une *Issue* avec le log d'erreur.
-* 💡 **Une idée ?** Propose une *Pull Request*, on adore les nouvelles fonctionnalités !
-* 💬 **Besoin d'aide ?** N'hésite pas à me contacter via mon profil GitHub.
+### 3️⃣ Déploiement
+Crée ton serveur, choisis l'Egg **FurCode — WebHost**, et laisse la magie opérer. 🐾
 
 ---
 
-## 🛡️ Licence & Crédits
-Ce projet est sous licence MIT. Libre à toi de le modifier et de le partager !
+## 📂 Structure du Territoire
 
-*Fait avec passion par **ArctosFire** 🐺🔥* *Rejoins la meute du code !*
+Une fois installé, ton serveur sera organisé ainsi :
+* `📂 /webroot` — Le cœur de ton site (fichiers publics).
+* `📂 /nginx` — Configurations Nginx personnalisables.
+* `📂 /php-fpm` — Réglages de ton moteur PHP.
+* `📂 /logs` — Pour surveiller tout ce qui se passe sous le capot.
+
+---
+
+## ❓ Foire Aux Questions (FAQ)
+
+<details>
+<summary><b>🐺 Comment mettre à jour mon code via GitHub ?</b></summary>
+Configure simplement les variables `GIT_ADDRESS` et `BRANCH` dans l'onglet "Startup" de ton serveur. À chaque "Reinstall", FurCode ira chercher les nouveautés !
+</details>
+
+<details>
+<summary><b>🔥 Est-ce que cet Egg supporte les bases de données ?</b></summary>
+Absolument ! Bien que l'Egg gère la partie Web, il peut se connecter à n'importe quel serveur MySQL ou MariaDB (interne ou externe).
+</details>
+
+<details>
+<summary><b>🦴 J'ai une erreur 502 Bad Gateway, que faire ?</b></summary>
+Pas de panique ! Vérifie souvent tes logs dans `/logs/php-fpm.log`. Généralement, c'est un petit souci de permissions ou un script PHP trop gourmand.
+</details>
+
+---
+
+## 🤝 Rejoindre la Meute
+
+Un bug ? Une idée géniale ? Une suggestion de design ?
+* 🐾 **Ouvre une Issue** pour discuter technique.
+* ✨ **Propose une Pull Request** pour améliorer l'écosystème.
+
+---
+
+<p align="center">
+  <i>Fait avec passion et quelques coups de griffes par <b>ArctosFire</b> 🐺🔥</i>
+</p>
