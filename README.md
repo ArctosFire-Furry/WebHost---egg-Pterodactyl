@@ -2,7 +2,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/Version-1.0.0-FF9800?style=for-the-badge&logo=github" alt="Version">
-  <img src="https://img.shields.io/badge/Community-Furry_Driven-white?style=for-the-badge&logo=pawprint&logoColor=orange" alt="Furry">
+  <img src="https://img.shields.io/badge/Community-Furry-black?style=for-the-badge&logo=pawprint&logoColor=orange" alt="Furry">
   <img src="https://img.shields.io/badge/Mainteneur-ArctosFire-4F5B93?style=for-the-badge&logo=github" alt="ArctosFire">
   <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License">
 </p>
