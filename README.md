@@ -23,8 +23,8 @@ Voici les différents environnements que tu peux déployer actuellement :
 
 | Nom de l'Egg | Description | Stack Technique | État |
 | :--- | :--- | :--- | :--- |
-| **🌐 WebHost Elite** | Hébergement web complet avec page d'accueil dynamique. | Nginx + PHP 8.x | ✅ Stable |
-| **📦 [Nom Futur]** | *Bientôt disponible : Serveur de fichiers ou API spécifique.* | - | 🏗️ En dev |
+| **[🌐 WebHost Elite](./Eggs/WebHost/)** | Hébergement web complet avec page d'accueil dynamique. | Nginx + PHP 8.x | ✅ Stable |
+| **[📦 Node.js App](./Eggs/NodeJS/)** | *Prochainement : Pour tes applications JS modernes.* | Node.js | 🏗️ En dev |
 
 > [!TIP]
 > **Le savais-tu ?** Tous nos Eggs intègrent le **Git-Sync** pour déployer ton code automatiquement depuis GitHub/GitLab à chaque démarrage !
@@ -34,7 +34,7 @@ Voici les différents environnements que tu peux déployer actuellement :
 ## 🚀 Installation Express
 
 ### 1️⃣ Choisir son Graal
-Navigue dans les dossiers du dépôt et télécharge le fichier `.json` correspondant à l'Egg que tu souhaites installer (ex: `WebHost-FurCode.json`).
+Clique sur le nom de l'Egg dans le tableau ci-dessus, puis télécharge le fichier `.json` correspondant dans son dossier.
 
 ### 2️⃣ Importation
 * Direction ton **Admin Panel Pterodactyl**.
