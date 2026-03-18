@@ -1,0 +1,136 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2026-03-18T18:36:50+01:00",
+    "name": "WebHost (FurCodes)",
+    "author": "info@djfinn.nl",
+    "description": "D\u00e9couvrez une solution d'h\u00e9bergement polyvalente con\u00e7ue pour tous vos projets web !\r\n\r\nPropuls\u00e9 par l'interface FurCode, cet environnement offre une gestion simplifi\u00e9e et performante :\r\n\r\n\u2022 Gestionnaire Composer int\u00e9gr\u00e9 : Sp\u00e9cifiez vos d\u00e9pendances dans le champ d\u00e9di\u00e9 pour une installation automatique au d\u00e9marrage.\r\n\u2022 D\u00e9ploiement WordPress : Activez l'option lors de la configuration pour obtenir une installation pr\u00eate \u00e0 l'emploi en quelques secondes.\r\n\u2022 Compatibilit\u00e9 : Enti\u00e8rement optimis\u00e9 pour les panels Pterodactyl.\r\n\r\nFurCode Web Server \u2013 Optimis\u00e9 pour la performance et la simplicit\u00e9.\r\n\u00a9 ArctosFire 2026",
+    "features": [],
+    "docker_images": {
+        "PHP 8.4": "ghcr.io\/sigma-production\/nginx-ptero:8.4",
+        "PHP 8.3": "ghcr.io\/sigma-production\/nginx-ptero:8.3",
+        "PHP 8.2": "ghcr.io\/sigma-production\/nginx-ptero:8.2",
+        "PHP 8.1": "ghcr.io\/sigma-production\/nginx-ptero:8.1",
+        "PHP 8.0 - EOL ": "ghcr.io\/sigma-production\/nginx-ptero:8.0"
+    },
+    "file_denylist": [],
+    "startup": "{{STARTUP_CMD}} && if [[ -n \"${COMPOSER_MODULES}\" ]]; then composer require \"${COMPOSER_MODULES}\" --working-dir=\/home\/container\/webroot; fi",
+    "config": {
+        "files": "{\r\n    \"nginx\/conf.d\/default.conf\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"    listen \": \"    listen {{server.build.default.port}};\"\r\n        }\r\n    },\r\n    \"nginx\/conf.d\/nextcloud.conf\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"    listen \": \"    listen {{server.build.default.port}};\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"[SUCCESS] Web server is running. All services started successfully.\",\r\n    \"userInteraction\": []\r\n}",
+        "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+        "stop": "^C & ^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/ash\r\n\r\n# Couleurs FurCode\r\nG=\"\\033[38;5;82m\"\r\nY=\"\\033[38;5;226m\"\r\nR=\"\\033[38;5;196m\"\r\nC=\"\\033[38;5;51m\"\r\nB=\"\\033[38;5;33m\"\r\nO=\"\\033[38;5;202m\"\r\nW=\"\\033[38;5;255m\"\r\nNC=\"\\033[0m\"\r\n\r\nclear\r\necho -e \"${O}\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510${NC}\"\r\necho -e \"${O}\u2502${W}            INSTALLATION FURCODE SERVER           ${O}\u2502${NC}\"\r\necho -e \"${O}\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518${NC}\"\r\necho \"\"\r\n\r\nlog_info() { echo -e \"  ${C}[INFO]${NC} $1\"; }\r\nlog_success() { echo -e \"  ${G}[OK]${NC} $1\"; }\r\nlog_error() { echo -e \"  ${R}[ERREUR]${NC} $1\"; }\r\n\r\n# D\u00e9but de l'installation\r\necho -e \"${W}ENVIRONNEMENT${NC}\"\r\ncd \/mnt\/server || { log_error \"Impossible d'acc\u00e9der \u00e0 \/mnt\/server\"; exit 1; }\r\n\r\necho -e \"  Mise \u00e0 jour des d\u00e9p\u00f4ts...\"\r\napk --update add git unzip curl xz > \/dev\/null 2>&1\r\nlog_success \"D\u00e9pendances syst\u00e8me install\u00e9es.\"\r\n\r\necho -e \"\\n${W}INFRASTRUCTURE${NC}\"\r\necho -e \"  R\u00e9cup\u00e9ration des configurations...\"\r\nif git clone https:\/\/github.com\/ArctosFire-Furry\/WebHost---egg-Pterodactyl .\/temp > \/dev\/null 2>&1; then\r\n    cp -r .\/temp\/nginx .\/temp\/php-fpm .\/temp\/webroot \/mnt\/server\/\r\n    cp .\/temp\/start.sh \/mnt\/server\/\r\n    chmod +x \/mnt\/server\/start.sh\r\n    rm -rf .\/temp\r\n    log_success \"Fichiers FurCode d\u00e9ploy\u00e9s.\"\r\nelse\r\n    log_error \"\u00c9chec du clonage du d\u00e9p\u00f4t de base.\"\r\n    exit 1\r\nfi\r\n\r\nmkdir -p \/mnt\/server\/tmp \/mnt\/server\/logs\r\nlog_success \"Structure des dossiers cr\u00e9\u00e9e.\"\r\n\r\n# Cas sp\u00e9cifique : WordPress\r\nif [ \"${WORDPRESS}\" = \"true\" ] || [ \"${WORDPRESS}\" = \"1\" ]; then\r\n    echo -e \"\\n${W}APPLICATION : WordPress${NC}\"\r\n    cd \/mnt\/server\/webroot || exit 1\r\n    log_info \"T\u00e9l\u00e9chargement de la derni\u00e8re version...\"\r\n    if curl -fLO https:\/\/wordpress.org\/latest.zip > \/dev\/null 2>&1; then\r\n        unzip -q latest.zip && mv wordpress\/* . && rm -rf wordpress latest.zip\r\n        log_success \"WordPress install\u00e9 avec succ\u00e8s.\"\r\n    else\r\n        log_error \"\u00c9chec du t\u00e9l\u00e9chargement de WordPress.\"\r\n        exit 1\r\n    fi\r\n    echo -e \"\\n${O}\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500${NC}\"\r\n    echo -e \"  ${G}INSTALLATION TERMINEE AVEC SUCC\u00c8S${NC}\"\r\n    echo -e \"${O}\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500${NC}\"\r\n    exit 0\r\nfi\r\n\r\n# Cas sp\u00e9cifique : NamelessMC\r\nif [ \"${NAMELESSMC}\" = \"true\" ] || [ \"${NAMELESSMC}\" = \"1\" ]; then\r\n    echo -e \"\\n${W}APPLICATION : NamelessMC${NC}\"\r\n    cd \/mnt\/server\/webroot || exit 1\r\n    log_info \"Extraction du pack NamelessMC...\"\r\n    curl -sL \"https:\/\/github.com\/NamelessMC\/Nameless\/releases\/latest\/download\/nameless-deps-dist.tar.xz\" | tar -xJ -C \/mnt\/server\/webroot || { log_error \"\u00c9chec de l'extraction\"; exit 1; }\r\n    \r\n    log_info \"Optimisation Nginx pour NamelessMC...\"\r\n    cd \/mnt\/server\/nginx\/conf.d || exit 1\r\n    rm -f default.conf\r\n    curl -sLO https:\/\/raw.githubusercontent.com\/Sigma-Production\/ptero-eggs\/NamelessMC\/nginx\/conf.d\/default.conf\r\n    log_success \"NamelessMC est pr\u00eat.\"\r\n    echo -e \"\\n${O}\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500${NC}\"\r\n    echo -e \"  ${G}INSTALLATION TERMINEE AVEC SUCC\u00c8S${NC}\"\r\n    echo -e \"${O}\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500${NC}\"\r\n    exit 0\r\nfi\r\n\r\n# Cas sp\u00e9cifique : Upload manuel\r\nif [ \"${USER_UPLOAD}\" = \"true\" ] || [ \"${USER_UPLOAD}\" = \"1\" ]; then\r\n    echo -e \"\\n${Y}MODE MANUEL ACTIF${NC}\"\r\n    log_info \"En attente de vos fichiers dans \/webroot...\"\r\n    exit 0\r\nfi\r\n\r\n# Installation Git Classique\r\necho -e \"\\n${W}PROJET GIT${NC}\"\r\ncd \/mnt\/server\/webroot || exit 1\r\n\r\nif [ -n \"${GIT_ADDRESS}\" ]; then\r\n    [ \"${GIT_ADDRESS##*.}\" != \"git\" ] && GIT_ADDRESS=\"${GIT_ADDRESS}.git\"\r\n    \r\n    # Auth Git\r\n    if [ -n \"${USERNAME}\" ] && [ -n \"${ACCESS_TOKEN}\" ]; then\r\n        GIT_ADDRESS=\"https:\/\/${USERNAME}:${ACCESS_TOKEN}@${GIT_ADDRESS#https:\/\/}\"\r\n    fi\r\n\r\n    if [ -n \"$(ls -A \/mnt\/server\/webroot 2>\/dev\/null)\" ]; then\r\n        if [ -d .git ]; then\r\n            log_info \"Mise \u00e0 jour du d\u00e9p\u00f4t existant...\"\r\n            git pull > \/dev\/null 2>&1 && log_success \"Mise \u00e0 jour r\u00e9ussie.\" || log_error \"\u00c9chec du pull.\"\r\n        else\r\n            log_error \"R\u00e9pertoire non vide et sans .git. Annulation.\"\r\n            exit 10\r\n        fi\r\n    else\r\n        log_info \"Clonage du projet...\"\r\n        if [ -n \"${BRANCH}\" ]; then\r\n            git clone --single-branch --branch \"${BRANCH}\" \"${GIT_ADDRESS}\" . > \/dev\/null 2>&1\r\n        else\r\n            git clone \"${GIT_ADDRESS}\" . > \/dev\/null 2>&1\r\n        fi\r\n        log_success \"Projet r\u00e9cup\u00e9r\u00e9.\"\r\n    fi\r\nelse\r\n    log_info \"Aucun d\u00e9p\u00f4t sp\u00e9cifi\u00e9, \u00e9tape ignor\u00e9e.\"\r\nfi\r\n\r\necho -e \"\\n${O}\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500${NC}\"\r\necho -e \"  ${G}INSTALLATION TERMINEE AVEC SUCC\u00c8S${NC}\"\r\necho -e \"  ${W}Pr\u00eat pour le premier d\u00e9marrage !${NC}\"\r\necho -e \"${O}\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500${NC}\"\r\necho \"\"",
+            "container": "alpine:latest",
+            "entrypoint": "ash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Commande de d\u00e9marrage",
+            "description": "Commande d'ex\u00e9cution principale.\r\n(Ne modifiez ce champ que si vous savez exactement ce que vous faites !)",
+            "env_variable": "STARTUP_CMD",
+            "default_value": ".\/start.sh",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "present",
+            "field_type": "text"
+        },
+        {
+            "name": "Installation WordPress",
+            "description": "Active ou d\u00e9sactive l'installation automatique de WordPress.\r\n\r\n0 = D\u00e9sactiv\u00e9 (Par d\u00e9faut)\r\n1 = Activ\u00e9",
+            "env_variable": "WORDPRESS",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Modules Composer",
+            "description": "Indiquez les modules Composer \u00e0 installer (s\u00e9parez les paquets par un espace). \r\nVous pourrez ajouter des paquets suppl\u00e9mentaires ult\u00e9rieurement.",
+            "env_variable": "COMPOSER_MODULES",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "D\u00e9p\u00f4t Git",
+            "description": "URL du d\u00e9p\u00f4t Git \u00e0 cloner pour votre projet.\r\n\r\nExemple : https:\/\/github.com\/votre-nom\/votre-projet",
+            "env_variable": "GIT_ADDRESS",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Branche Git",
+            "description": "Sp\u00e9cifiez la branche \u00e0 r\u00e9cup\u00e9rer depuis le d\u00e9p\u00f4t. \r\n\r\nLaissez vide pour utiliser la branche par d\u00e9faut (g\u00e9n\u00e9ralement main ou master).",
+            "env_variable": "BRANCH",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Mise \u00e0 jour automatique",
+            "description": "R\u00e9cup\u00e8re les derniers fichiers au d\u00e9marrage lors de l'utilisation d'un d\u00e9p\u00f4t GitHub.\r\n\r\n0 = D\u00e9sactiv\u00e9 (Par d\u00e9faut)\r\n1 = Activ\u00e9",
+            "env_variable": "AUTO_UPDATE",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "D\u00e9p\u00f4t manuel de fichiers",
+            "description": "Ignore toutes les \u00e9tapes d'installation automatique pour permettre un envoi manuel des fichiers par l'utilisateur.\r\n\r\n0 = D\u00e9sactiv\u00e9 (Par d\u00e9faut)\r\n1 = Activ\u00e9",
+            "env_variable": "USER_UPLOAD",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Utilisateur Git",
+            "description": "Nom d'utilisateur pour l'authentification Git (n\u00e9cessaire pour les d\u00e9p\u00f4ts priv\u00e9s).",
+            "env_variable": "USERNAME",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Jeton d'acc\u00e8s Git",
+            "description": "Mot de passe ou jeton pour l'authentification Git.\r\n\r\nIl est fortement recommand\u00e9 d'utiliser un Jeton d'Acc\u00e8s Personnel (PAT) pour plus de s\u00e9curit\u00e9 :\r\n\u2022 GitHub : https:\/\/github.com\/settings\/tokens\r\n\u2022 GitLab : https:\/\/gitlab.com\/-\/profile\/personal_access_tokens",
+            "env_variable": "ACCESS_TOKEN",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Installation NamelessMC",
+            "description": "Activez cette option pour installer automatiquement NamelessMC sur votre serveur.\r\n\r\nSite officiel : https:\/\/namelessmc.com\/\r\n0 = D\u00e9sactiv\u00e9 (Par d\u00e9faut)\r\n1 = Activ\u00e9",
+            "env_variable": "NAMELESSMC",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        }
+    ]
+}
