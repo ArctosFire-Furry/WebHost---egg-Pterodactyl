@@ -23,7 +23,7 @@ Voici les différents environnements que tu peux déployer actuellement :
 
 | Nom de l'Egg | Description | Stack Technique | État |
 | :--- | :--- | :--- | :--- |
-| **[🌐 WebHost Elite](./Eggs/WebHost/)** | Hébergement web complet avec page d'accueil dynamique. | Nginx + PHP 8.x | ✅ Stable |
+| **[🌐 WebHost](./Eggs/WebHost/)** | Hébergement web complet avec page d'accueil dynamique. | Nginx + PHP 8.x | ✅ Stable |
 | **[📦 Node.js App](./Eggs/NodeJS/)** | *Prochainement : Pour tes applications JS modernes.* | Node.js | 🏗️ En dev |
 
 > [!TIP]
