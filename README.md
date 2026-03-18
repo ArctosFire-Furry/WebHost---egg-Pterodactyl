@@ -11,46 +11,47 @@
 
 ## 🌟 L'Essence du Projet
 
-Bienvenue dans l'antre de **FurCode** ! Ce dépôt évolue pour devenir une véritable bibliothèque d'environnements **clé en main** pour Pterodactyl. 
+Bienvenue dans l'antre de **FurCode** ! Ce dépôt est une bibliothèque d'environnements **optimisés et sécurisés** pour Pterodactyl, conçus par un futur expert en Cybersécurité. 🐾
 
-Que tu sois un développeur chevronné ou un louveteau qui débute, ces Eggs sont pensés pour offrir une structure de dossiers intelligente, des logs clairs et une performance optimale, le tout avec une petite touche de style unique. 🐾
+L'objectif est simple : offrir des Eggs qui ne se contentent pas de "tourner", mais qui sont configurés avec des **logs clairs (FurLogs)**, des **protections contre les vulnérabilités** communes et une gestion intelligente des ressources. Que tu déploies du Web ou de l'applicatif, la meute veille sur ton instance.
 
 ---
 
 ## 🛠️ La Meute des Eggs disponibles
 
-Voici les différents environnements que tu peux déployer actuellement :
+Chaque Egg possède sa propre architecture interne optimisée pour sa technologie :
 
 | Nom de l'Egg | Description | Stack Technique | État |
 | :--- | :--- | :--- | :--- |
-| **[🌐 WebHost](./Eggs/WebHost/)** | Hébergement web complet avec page d'accueil dynamique. | Nginx + PHP 8.x | ✅ Stable |
+| **[🌐 WebHost](./Eggs/WebHost/)** | Hébergement complet avec logs personnalisés et sécurité durcie. | Nginx + PHP 8.x | ✅ Stable |
+| **[🦴 Autre Egg]()** | *Prochainement...* | À définir | 🚧 Dév |
 
 > [!TIP]
-> **Le savais-tu ?** Tous nos Eggs intègrent le **Git-Sync** pour déployer ton code automatiquement depuis GitHub/GitLab à chaque démarrage !
+> **FurLogs intégré :** Nos Eggs Web utilisent une formulation de log propriétaire pour rendre la console lisible et détecter les comportements suspects d'un coup d'œil ! 🐾
 
 ---
 
 ## 🚀 Installation Express
 
-### 1️⃣ Choisir son Graal
-Clique sur le nom de l'Egg dans le tableau ci-dessus, puis télécharge le fichier `.json` correspondant dans son dossier.
+### 1️⃣ Choisir son Egg
+Navigue dans le dossier `/Eggs` et télécharge le fichier `.json` correspondant à l'environnement souhaité.
 
-### 2️⃣ Importation
+### 2️⃣ Importation dans le Panel
 * Direction ton **Admin Panel Pterodactyl**.
-* Section **Nests** > Choisis ton Nest (ou crée-en un nommé "FurCode").
+* Section **Nests** > Choisis un Nest (ou crée-en un nommé "FurCode").
 * Clique sur **Import Egg** et sélectionne ton fichier JSON.
 
 ### 3️⃣ Déploiement
-Crée ton serveur, sélectionne l'Egg choisi, et laisse la magie opérer. ✨
+Crée ton serveur, alloue les ressources, et lance le démarrage. La magie opère. ✨
 
 ---
 
-## 📂 Structure Standard du Territoire
+## 📂 Philosophie du Territoire
 
-Pour garder une cohérence entre tous nos Eggs, nous utilisons cette structure :
-* `📂 /webroot` ou `📂 /app` — Le cœur de tes fichiers.
-* `📂 /config` — Configurations personnalisables (Nginx, PHP, etc.).
-* `📂 /logs` — Pour surveiller tout ce qui se passe sous le capot.
+Contrairement à d'autres collections, FurCode ne t'impose pas une structure rigide. Chaque Egg est construit sur mesure :
+* **Adaptabilité :** L'arborescence est pensée pour respecter les standards de chaque langage/logiciel.
+* **Transparence :** Les fichiers de configuration (Nginx, PHP-FPM, etc.) sont accessibles et optimisés pour le container.
+* **Traçabilité :** Un focus particulier est mis sur la sortie console pour faciliter le debug et la surveillance.
 
 ---
 
@@ -58,17 +59,17 @@ Pour garder une cohérence entre tous nos Eggs, nous utilisons cette structure :
 
 <details>
 <summary><b>🐺 Comment mettre à jour mon code via GitHub ?</b></summary>
-Configure simplement les variables `GIT_ADDRESS` et `BRANCH` dans l'onglet "Startup". À chaque "Reinstall", FurCode ira chercher tes dernières modifications !
+Utilise les variables `GIT_ADDRESS` et `BRANCH` dans l'onglet "Startup". À chaque "Reinstall", FurCode synchronise ton code automatiquement !
 </details>
 
 <details>
-<summary><b>🔥 Est-ce que les Eggs supportent les bases de données ?</b></summary>
-Absolument ! Nos Eggs sont conçus pour communiquer parfaitement avec tes instances MySQL, MariaDB ou MongoDB sur Pterodactyl.
+<summary><b>🔥 Est-ce sécurisé pour la production ?</b></summary>
+Oui ! Les réglages PHP et Nginx sont durcis (désactivation de fonctions dangereuses, TLS 1.3, masquage de version) pour minimiser la surface d'attaque.
 </details>
 
 <details>
 <summary><b>🦴 Un souci technique ?</b></summary>
-Si une erreur survient, jette un œil dans le dossier `/logs`. Si tu es bloqué, n'hésite pas à ouvrir une Issue, la meute est là pour s'entraider.
+Si une erreur survient, vérifie tes logs dans la console ou les fichiers `.log`. En cas de blocage, ouvre une Issue pour que la meute puisse t'aider.
 </details>
 
 ---
